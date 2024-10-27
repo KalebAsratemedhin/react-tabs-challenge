@@ -3,8 +3,9 @@ import Tabs from './components/Tabs';
 
 function App() {
   return (
-    <div>
+    <div className='container'>
       <Tabs/>
+      jdfkj
     </div>
   );
 }
