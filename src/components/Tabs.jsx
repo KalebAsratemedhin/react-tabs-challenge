@@ -22,7 +22,7 @@ const Tabs = () => {
                 tabs.map((index) => {
                     return (
                         <div key={index} className={`tab ${current === index ? 'active' : ''}`} onClick={() => setCurrent(index)}>
-                            <p>Tab {index}   </p>
+                          Tab {index}   
                         </div>)
                 })
                 }

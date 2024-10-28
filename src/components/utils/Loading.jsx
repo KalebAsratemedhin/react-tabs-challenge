@@ -2,7 +2,7 @@
 const Loading = () => {
   return (
     <div className="spinner-box">
-        <div className="spinner"></div>
+        <div data-testid="spinner" className="spinner"></div>
     </div>
   )
 }

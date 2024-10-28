@@ -40,6 +40,8 @@ body {
 
 .tabs .header .tab:hover{
     backdrop-filter: brightness(185%);
+    color: white;
+
 }
 
 .tabs .body{
@@ -57,14 +59,12 @@ body {
 }
 
 
-.active {
+.tabs .header .tab.active {
     background-color: rgb(36, 96, 124);
-
-}
-
-.active p{
     color: white;
+
 }
+
 
 .error{
     color: red;
