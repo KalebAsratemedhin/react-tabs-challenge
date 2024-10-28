@@ -1,49 +1,36 @@
 import React, { useState } from 'react';
+import { useGetTabsQuery } from '../redux/api/tabsAPI';
+import Loading from './utils/Loading';
+import Error from './utils/Error';
 
 const Tabs = () => {
-    const [current, setCurrent] = useState(0)
+    const [current, setCurrent] = useState(1)
+    const {isLoading, isSuccess, isError, error, data: content} = useGetTabsQuery()
+    const tabs = [1, 2, 3, 4]
 
-    const tabs = [
-        {
-            id: 1,
-            tabTitle: 'Tab 1',
-            title: 'Title 1',
-            content: 'In sint do non adipisicing incididunt excepteur sit. Voluptate esse aliqua pariatur dolor ex occaecat sunt eu. Pariatur ullamco id dolore sint proident sint nostrud nisi sit id est. Duis et excepteur cupidatat sint nisi dolore qui irure qui in id excepteur irure laboris. Pariatur mollit duis cupidatat nisi Lorem non et in dolor aliquip ea sint aute. Dolore aute duis laboris exercitation occaecat sunt. Enim veniam Lorem do ipsum aliqua qui eu ipsum consectetur ex dolore ea ipsum.'
-        },
-        {
-            id: 2,
-            tabTitle: 'Tab 2',
-            title: 'Title 2',
-            content: 'Non aliquip fugiat velit ad officia Lorem tempor cillum incididunt elit proident mollit. Reprehenderit qui nisi ut occaecat minim velit deserunt occaecat quis magna mollit. Veniam proident consectetur sunt mollit est magna Lorem voluptate enim cupidatat consequat. Et pariatur aliquip commodo nisi deserunt exercitation enim officia voluptate in nisi. Eu ea esse qui est ea pariatur nostrud non elit irure. Ad exercitation Lorem exercitation ipsum eiusmod ea duis ad mollit veniam aliquip veniam. Lorem pariatur elit ea duis.'
-        },
-        {
-            id: 3,
-            tabTitle: 'Tab 3',
-            title: 'Title 3',
-            content: 'Deserunt et elit elit ad dolor magna. Nisi amet consectetur Lorem eiusmod dolore adipisicing do reprehenderit. Voluptate consequat magna nostrud in officia labore. Minim excepteur consectetur quis nostrud nisi magna duis sunt sint qui. Fugiat ea reprehenderit eiusmod proident officia. Consequat labore qui velit Lorem consectetur incididunt ut nisi.'
-        },
-        {
-            id: 4,
-            tabTitle: 'Tab 4',
-            title: 'Title 4',
-            content: 'Minim in dolor do fugiat laborum duis labore consectetur. Amet ut sint ipsum dolor ad nostrud commodo sunt veniam enim aliquip nulla sint ullamco. Do cupidatat et quis laborum esse est commodo. Commodo sunt consectetur do consequat minim occaecat id magna ullamco consequat irure.'
-        }
-    ];
+    if(isLoading)
+        return <Loading />
+
+    if(isError)
+        return <Error message={error.message || error.status || "An error occurred."} />
+    
 
     return (
         <div className='tabs'>
             <div className='header'>
-                {tabs.map((tab, index) => {
+                {
+                tabs.map((index) => {
                     return (
-                        <div className={`tab ${current === index ? 'active' : ''}`} onClick={() => setCurrent(index)}>
-                            <p>{tab.tabTitle}   </p>
+                        <div key={index} className={`tab ${current === index ? 'active' : ''}`} onClick={() => setCurrent(index)}>
+                            <p>Tab {index}   </p>
                         </div>)
-                })}
+                })
+                }
             </div>
             <div className='body'>
-                <h1>{tabs[current].title}</h1>
+                <h1>Title {current}</h1>
                 <div>
-                    {tabs[current].content}
+                    {content}
                 </div>
             </div>
 
